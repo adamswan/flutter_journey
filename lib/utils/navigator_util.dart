@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:journey/pages/login_page.dart';
-import 'package:journey/pages/home_page.dart';
+// import 'package:journey/pages/home_page.dart';
+import 'package:journey/navigator/tab_navigator.dart';
 
 class NavigatorUtil {
   // 用于在获取不到context时，设置一个默认的context
@@ -20,7 +21,7 @@ class NavigatorUtil {
     // 跳转到首页后，不允许再返回登录页
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomePage()),
+      MaterialPageRoute(builder: (context) => const TabNavigator()),
     );
   }
 
