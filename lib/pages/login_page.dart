@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journey/utils/screen_adapter_helper.dart';
 import 'package:journey/utils/view_util.dart';
 import 'package:journey/widget/input_widget.dart';
 import 'package:journey/utils/string_util.dart';
@@ -23,6 +24,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenHelper.init(context); // 初始化屏幕适配
+
     return Scaffold(
       resizeToAvoidBottomInset: false, // 键盘弹出时，让输入框不被遮挡
       body: Stack(children: [..._background(), _content()]),
