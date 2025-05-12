@@ -11,7 +11,7 @@ class _TravelPageState extends State<TravelPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('旅拍')),
+      appBar: AppBar(title: const Text('旅拍'), backgroundColor: Colors.blue),
       body: Column(children: [Text('旅拍')]),
     );
   }
