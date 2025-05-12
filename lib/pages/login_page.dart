@@ -5,6 +5,7 @@ import 'package:journey/utils/string_util.dart';
 import 'package:journey/widget/login_button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:journey/dao/login_dao.dart';
+import 'package:journey/utils/navigator_util.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -22,7 +23,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Stack(children: [..._background(), _content()]));
+    return Scaffold(
+      resizeToAvoidBottomInset: false, // 键盘弹出时，让输入框不被遮挡
+      body: Stack(children: [..._background(), _content()]),
+    );
   }
 
   // 背景组件（包括背景图片、灰色遮罩）
@@ -81,7 +85,11 @@ class _LoginPageState extends State<LoginPage> {
           placeholderBox(height: 45),
 
           // 登录按钮
-          LoginButton('登录', enable: loginEnable, onPressed: () => _login()),
+          LoginButton(
+            '登录',
+            enable: loginEnable,
+            onPressed: () => _login(context),
+          ),
 
           placeholderBox(height: 15),
 
@@ -101,9 +109,10 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _login() async {
+  _login(context) async {
     try {
       await LoginDao.login(userName: userName!, password: password!);
+      NavigatorUtil.goToHome(context);
       print('登录成功');
     } catch (e) {
       print('登录失败$e');

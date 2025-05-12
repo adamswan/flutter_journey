@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:journey/dao/header_util.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:journey/utils/navigator_util.dart';
 
 // 登录接口
 class LoginDao {
@@ -44,15 +45,24 @@ class LoginDao {
     }
   }
 
+  // 保存登录凭证
   static void _saveBoardingPass(String val) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(boardingPass, val);
   }
 
+  // 获取登录凭证
   static getBoadringPass() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var res = prefs.getString(boardingPass);
     print('取数据$res');
     return res;
+  }
+
+  static void logout() async {
+    // 移除登录凭证
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(boardingPass); // 移除保存的登录凭证
+    NavigatorUtil.goToLogin();
   }
 }
