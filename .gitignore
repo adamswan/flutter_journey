@@ -43,3 +43,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# 忽略 api-service-backend 下的 node_modules 目录
+/api-service-backend/node_modules/

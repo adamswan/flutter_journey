@@ -4,6 +4,7 @@ import 'package:journey/widget/input_widget.dart';
 import 'package:journey/utils/string_util.dart';
 import 'package:journey/widget/login_button_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:journey/dao/login_dao.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -100,8 +101,13 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  _login() {
-    print('去登录');
+  _login() async {
+    try {
+      await LoginDao.login(userName: userName!, password: password!);
+      print('登录成功');
+    } catch (e) {
+      print('登录失败$e');
+    }
   }
 
   // 用手机默认浏览器跳转注册页（app 与 h5 联动）
