@@ -6,8 +6,7 @@ hiHeaders() async {
   Map<String, String> header = {
     "auth-token": "fgjhjsdfnjhdsabfjhdjsajkfdsgfnskdg",
     "couser-flag": "ft",
-    'boarding-pass': boardingPass ?? '',
+    'authorization': boardingPass ?? '',
   };
-  print('header: $header');
   return header;
 }

@@ -20,15 +20,11 @@ class LoginDao {
     // 用我自己写的后端服务
     var uri = Uri.http("localhost:3000", "/api/account/login", paramsMap);
 
-    print('uri: $uri');
-
     final response = await http.post(uri, headers: await hiHeaders());
 
     Utf8Decoder utf8decoder = const Utf8Decoder();
 
     String bodyString = utf8decoder.convert(response.bodyBytes);
-
-    print('响应体 $bodyString');
 
     if (response.statusCode == 200) {
       var result = json.decode(bodyString);

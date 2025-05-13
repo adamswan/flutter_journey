@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:journey/model/home_model.dart';
 import 'package:journey/utils/screen_adapter_helper.dart';
 
 class BannerWidget extends StatefulWidget {
-  final List<String> bannerList;
+  final List<CommonModel> bannerList;
 
   const BannerWidget({super.key, required this.bannerList});
 
@@ -28,11 +29,11 @@ class _BannerWidgetState extends State<BannerWidget> {
       children: [
         CarouselSlider(
           items:
-              widget.bannerList.map((url) {
+              widget.bannerList.map((item) {
                 return SizedBox(
                   width: MediaQuery.of(context).size.width, // 设置容器宽度为屏幕宽度
                   child: Image.network(
-                    url,
+                    item.icon.toString(),
                     fit: BoxFit.cover, // 使图片覆盖整个容器
                     width: double.infinity, // 图片宽度占满容器
                   ),

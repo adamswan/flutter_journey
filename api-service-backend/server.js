@@ -13,7 +13,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// 模拟数据库
+// ----------模拟数据库
 // ! 用户
 const users = [
   {
@@ -22,12 +22,277 @@ const users = [
     password: bcrypt.hashSync("2", 10), // 使用 bcrypt 加密初始密码
   },
 ];
+
 const trips = [];
+
+//! 首页
+const homeData = [
+  {
+    code: 0,
+    data: {
+      config: {
+        searchUrl: "https://www.example.com/search",
+      },
+      bannerList: [
+        {
+          icon: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+          title: "Banner 1",
+          url: "https://example.com/banner1",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://images.unsplash.com/photo-1522205408450-add114ad53fe",
+          title: "Banner 2",
+          url: "https://example.com/banner2",
+          statusBarColor: "#000000",
+          hideAppBar: true,
+        },
+        {
+          icon: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308",
+          title: "Banner 3",
+          url: "https://example.com/banner3",
+          statusBarColor: "#FF5733",
+          hideAppBar: false,
+        },
+      ],
+      localNavList: [
+        {
+          icon: "https://picsum.photos/id/40/50/50?grayscale", // 攻略·景点 图标 URL
+          title: "攻略·景点",
+          url: "/guide",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/43/50/50?grayscale", // 周边游 图标 URL
+          title: "周边游",
+          url: "/surroundings",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/13/50/50?grayscale", // 美食林 图标 URL
+          title: "美食林",
+          url: "/food",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/35/50/50?grayscale", // 一日游 图标 URL
+          title: "一日游",
+          url: "/oneday",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/15/50/50?grayscale", // 当地攻略 图标 URL
+          title: "当地攻略",
+          url: "/local_guide",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+      ],
+      gridNav: {
+        hotel: {
+          startColor: "#FFEB3B",
+          endColor: "#FFC107",
+          mainItem: {
+            icon: "https://picsum.photos/seed/hotel-main/200/300",
+            title: "豪华酒店",
+            url: "/hotel",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item1: {
+            icon: "https://picsum.photos/seed/hotel1/200/300",
+            title: "五星推荐",
+            url: "/hotel/recommend",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item2: {
+            icon: "https://picsum.photos/seed/hotel2/200/300",
+            title: "特价优惠",
+            url: "/hotel/special",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item3: {
+            icon: "https://picsum.photos/seed/hotel3/200/300",
+            title: "会员专享",
+            url: "/hotel/vip",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item4: {
+            icon: "https://picsum.photos/seed/hotel4/200/300",
+            title: "附近酒店",
+            url: "/hotel/nearby",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+        },
+        flight: {
+          startColor: "#2196F3",
+          endColor: "#0D47A1",
+          mainItem: {
+            icon: "https://picsum.photos/seed/flight-main/200/300",
+            title: "航班查询",
+            url: "/flight",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item1: {
+            icon: "https://picsum.photos/seed/flight1/200/300",
+            title: "国内机票",
+            url: "/flight/domestic",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item2: {
+            icon: "https://picsum.photos/seed/flight2/200/300",
+            title: "国际机票",
+            url: "/flight/international",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item3: {
+            icon: "https://picsum.photos/seed/flight3/200/300",
+            title: "特价航班",
+            url: "/flight/special",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item4: {
+            icon: "https://picsum.photos/seed/flight4/200/300",
+            title: "行程管理",
+            url: "/flight/manage",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+        },
+        travel: {
+          startColor: "#4CAF50",
+          endColor: "#388E3C",
+          mainItem: {
+            icon: "https://picsum.photos/seed/travel-main/200/300",
+            title: "旅游攻略",
+            url: "/travel",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item1: {
+            icon: "https://picsum.photos/seed/travel1/200/300",
+            title: "热门目的地",
+            url: "/travel/popular",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item2: {
+            icon: "https://picsum.photos/seed/travel2/200/300",
+            title: "自由行",
+            url: "/travel/independent",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item3: {
+            icon: "https://picsum.photos/seed/travel3/200/300",
+            title: "跟团游",
+            url: "/travel/group",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+          item4: {
+            icon: "https://picsum.photos/seed/travel4/200/300",
+            title: "定制路线",
+            url: "/travel/custom",
+            statusBarColor: "#FFFFFF",
+            hideAppBar: false,
+          },
+        },
+      },
+      subNavList: [
+        {
+          icon: "https://picsum.photos/seed/subnav1/200/300",
+          title: "机票预订",
+          url: "/booking/flight",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/seed/subnav2/200/300",
+          title: "酒店预订",
+          url: "/booking/hotel",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/seed/subnav3/200/300",
+          title: "景点门票",
+          url: "/booking/ticket",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+      ],
+      salesBox: {
+        icon: "https://picsum.photos/seed/salesbox/200/300",
+        moreUrl: "https://example.com/more",
+        bigCard1: {
+          icon: "https://picsum.photos/seed/bigcard1/200/300",
+          title: "限时特惠",
+          url: "/sale/limited",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        bigCard2: {
+          icon: "https://picsum.photos/seed/bigcard2/200/300",
+          title: "会员专属",
+          url: "/sale/vip",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        smallCard1: {
+          icon: "https://picsum.photos/seed/smallcard1/200/300",
+          title: "机票折扣",
+          url: "/sale/flight",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        smallCard2: {
+          icon: "https://picsum.photos/seed/smallcard2/200/300",
+          title: "酒店优惠",
+          url: "/sale/hotel",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        smallCard3: {
+          icon: "https://picsum.photos/seed/smallcard3/200/300",
+          title: "周边游",
+          url: "/sale/local",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        smallCard4: {
+          icon: "https://picsum.photos/seed/smallcard4/200/300",
+          title: "自驾游",
+          url: "/sale/driving",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+      },
+    },
+    extra: {},
+    msg: "string",
+  },
+];
+
+// ----------模拟数据库
 
 // 密钥
 const SECRET_KEY = "your-secret-key-here";
 
-// 工具函数
+// 生成 token
 const generateToken = (user) => {
   return jwt.sign(
     { id: user.id, username: user.username },
@@ -36,6 +301,7 @@ const generateToken = (user) => {
   );
 };
 
+// 验证 token
 const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"];
 
@@ -60,7 +326,7 @@ const verifyToken = (req, res, next) => {
   );
 };
 
-// 账户管理API
+// 注册
 app.post("/api/account/register", async (req, res) => {
   try {
     const { username, password, email, phone, avatar } =
@@ -142,6 +408,7 @@ app.post("/api/account/login", async (req, res) => {
   }
 });
 
+// 获取用户信息
 app.get("/api/account/profile", verifyToken, (req, res) => {
   try {
     const user = users.find((u) => u.id === req.user.id);
@@ -162,6 +429,7 @@ app.get("/api/account/profile", verifyToken, (req, res) => {
   }
 });
 
+// 更新用户信息
 app.put(
   "/api/account/profile",
   verifyToken,
@@ -197,6 +465,18 @@ app.put(
     }
   }
 );
+
+// 获取首页信息
+app.get("/api/home", verifyToken, (req, res) => {
+  try {
+    res.send(homeData);
+  } catch (error) {
+    res.status(500).send({
+      message: "Error fetching trips",
+      error: error.message,
+    });
+  }
+});
 
 // 旅行行程API
 app.post("/api/trip", verifyToken, (req, res) => {

@@ -1,40 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:journey/dao/login_dao.dart';
+import 'package:journey/model/home_model.dart';
 import 'package:journey/utils/navigator_util.dart';
 import 'package:journey/utils/screen_adapter_helper.dart';
 import 'package:journey/widget/banner_widget.dart';
+import 'package:journey/dao/home_dao.dart';
+import 'package:journey/widget/local_nav_list_widget.dart';
+import 'package:journey/widget/grid_nav_widget.dart';
 
 class HomePage extends StatefulWidget {
+  static Config? configModel;
+
   const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
+// with 表示使用混入
 class _HomePageState extends State<HomePage>
     with AutomaticKeepAliveClientMixin {
-  // with 表示使用混入
-
-  List<String> bannerList = [
-    "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    "https://images.unsplash.com/photo-1522205408450-add114ad53fe",
-    "https://images.unsplash.com/photo-1519125323398-675f0ddb6308",
-    "https://images.unsplash.com/photo-1523205771623-e0faa4d2813d",
-    "https://images.unsplash.com/photo-1508704019882-f9cf40e475b4",
-  ];
-
   // 顶部导航栏的透明度
   double topBarAlpha = 0;
   static const topBarScrollOffset = 100;
 
+  // 首页的数据
+  List<CommonModel> localNavList = [];
+  List<CommonModel> bannerList = [];
+  List<CommonModel> subNavList = [];
+  GridNav? gridNavModel;
+  SalesBox? salesBoxModel;
+
   handlePressed() {
     // 退出登录
     return LoginDao.logout();
-  }
-
-  // dart 的 get 标记语法,不能有小括号; 而 set 标记语法可以有小括号
-  get _logout {
-    return TextButton(onPressed: handlePressed, child: Text('退出登录'));
   }
 
   // 生成透明度能变化的顶部导航栏
@@ -54,8 +53,21 @@ class _HomePageState extends State<HomePage>
   _listView() {
     return ListView(
       children: [
+        // 轮播图
         BannerWidget(bannerList: bannerList),
+
+        // 球形导航按钮
+        LocalNavWidget(localNavList: localNavList),
+
+        // 酒店 机票 旅游 的卡片导航
+        GridNavWidget(gridNavModel: gridNavModel!),
+
+        // 秒杀专区
+        // SalesBoxWidget(salesBoxModel: salesBoxModel),
+
+        // 底部导航栏
         _logout,
+
         SizedBox(height: 800, child: ListTile(title: Text('123'))),
       ],
     );
@@ -74,6 +86,34 @@ class _HomePageState extends State<HomePage>
     setState(() {
       topBarAlpha = alpha;
     });
+  }
+
+  // dart 的 get 标记语法,不能有小括号; 而 set 标记语法可以有小括号
+  get _logout {
+    return TextButton(onPressed: handlePressed, child: Text('退出登录'));
+  }
+
+  _handleRefresh() async {
+    try {
+      HomeModel model = await HomeDao.getHomePageData();
+      setState(() {
+        HomePage.configModel = model.config;
+        localNavList = model.localNavList ?? [];
+        subNavList = model.subNavList ?? [];
+        gridNavModel = model.gridNav;
+        salesBoxModel = model.salesBox;
+        bannerList = model.bannerList ?? [];
+      });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  // 获取home数据
+  @override
+  void initState() {
+    super.initState();
+    _handleRefresh();
   }
 
   @override
