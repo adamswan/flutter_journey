@@ -51,7 +51,6 @@ class LoginDao {
   static getBoadringPass() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var res = prefs.getString(boardingPass);
-    print('取数据$res');
     return res;
   }
 

@@ -116,15 +116,13 @@ class _LoginPageState extends State<LoginPage> {
     try {
       await LoginDao.login(userName: userName!, password: password!);
       NavigatorUtil.goToHome(context);
-      print('登录成功');
     } catch (e) {
-      print('登录失败$e');
+      debugPrint('登录失败$e');
     }
   }
 
   // 用手机默认浏览器跳转注册页（app 与 h5 联动）
   _jumpToRegister() async {
-    print('去H5注册页');
     Uri uri = Uri.parse(
       'https://api.devio.org/uapi/swagger-ui.html#/Account/registrationUsingPOST',
     );
@@ -147,7 +145,6 @@ class _LoginPageState extends State<LoginPage> {
     // 更新状态
     setState(() {
       loginEnable = enable;
-      print('loginEnable $loginEnable');
     });
   }
 }

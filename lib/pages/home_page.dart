@@ -58,16 +58,20 @@ class _HomePageState extends State<HomePage>
     return MediaQuery.removePadding(
       removeTop: true,
       context: context,
-      // 监听 ListView 的滚动事件
-      child: NotificationListener(
-        onNotification: (scrollNotification) {
-          if (scrollNotification is ScrollNotification &&
-              scrollNotification.depth == 0) {
-            _onScroll(scrollNotification.metrics.pixels);
-          }
-          return false;
-        },
-        child: _listView(),
+
+      child: RefreshIndicator(
+        onRefresh: _handleRefresh,
+        child: NotificationListener(
+          // 监听 ListView 的滚动事件
+          onNotification: (scrollNotification) {
+            if (scrollNotification is ScrollNotification &&
+                scrollNotification.depth == 0) {
+              _onScroll(scrollNotification.metrics.pixels);
+            }
+            return false;
+          },
+          child: _listView(),
+        ),
       ),
     );
   }
@@ -126,7 +130,7 @@ class _HomePageState extends State<HomePage>
     return TextButton(onPressed: handlePressed, child: Text('退出登录'));
   }
 
-  _handleRefresh() async {
+  Future<void> _handleRefresh() async {
     try {
       HomeModel model = await HomeDao.getHomePageData();
       setState(() {
