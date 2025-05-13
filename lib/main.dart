@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        scaffoldBackgroundColor: Colors.white, //
+        scaffoldBackgroundColor: Color(0xFFF5F5F5), //
       ),
       home: const LoginPage(),
     );

@@ -58,35 +58,35 @@ const homeData = [
       ],
       localNavList: [
         {
-          icon: "https://picsum.photos/id/40/50/50?grayscale", // 攻略·景点 图标 URL
+          icon: "https://picsum.photos/id/40/50/50", // 攻略·景点 图标 URL
           title: "攻略·景点",
           url: "/guide",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
         {
-          icon: "https://picsum.photos/id/43/50/50?grayscale", // 周边游 图标 URL
+          icon: "https://picsum.photos/id/43/50/50", // 周边游 图标 URL
           title: "周边游",
           url: "/surroundings",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
         {
-          icon: "https://picsum.photos/id/13/50/50?grayscale", // 美食林 图标 URL
+          icon: "https://picsum.photos/id/13/50/50", // 美食林 图标 URL
           title: "美食林",
           url: "/food",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
         {
-          icon: "https://picsum.photos/id/35/50/50?grayscale", // 一日游 图标 URL
+          icon: "https://picsum.photos/id/35/50/50", // 一日游 图标 URL
           title: "一日游",
           url: "/oneday",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
         {
-          icon: "https://picsum.photos/id/15/50/50?grayscale", // 当地攻略 图标 URL
+          icon: "https://picsum.photos/id/15/50/50", // 当地攻略 图标 URL
           title: "当地攻略",
           url: "/local_guide",
           statusBarColor: "#FFFFFF",
@@ -214,68 +214,123 @@ const homeData = [
       },
       subNavList: [
         {
-          icon: "https://picsum.photos/seed/subnav1/200/300",
-          title: "机票预订",
+          icon: "https://picsum.photos/id/23/50/50?grayscale",
+          title: "wifi电话卡",
           url: "/booking/flight",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
         {
-          icon: "https://picsum.photos/seed/subnav2/200/300",
-          title: "酒店预订",
+          icon: "https://picsum.photos/id/24/50/50?grayscale",
+          title: "保险签证",
           url: "/booking/hotel",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
         {
-          icon: "https://picsum.photos/seed/subnav3/200/300",
-          title: "景点门票",
+          icon: "https://picsum.photos/id/25/50/50?grayscale",
+          title: "外币兑换",
+          url: "/booking/ticket",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/26/50/50?grayscale",
+          title: "购物",
+          url: "/booking/ticket",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/27/50/50?grayscale",
+          title: "当地向导",
+          url: "/booking/ticket",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/28/50/50?grayscale",
+          title: "自由行",
+          url: "/booking/ticket",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/29/50/50?grayscale",
+          title: "境外玩乐",
+          url: "/booking/ticket",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/30/50/50?grayscale",
+          title: "录屏卡",
+          url: "/booking/ticket",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/31/50/50?grayscale",
+          title: "信用卡",
+          url: "/booking/ticket",
+          statusBarColor: "#FFFFFF",
+          hideAppBar: false,
+        },
+        {
+          icon: "https://picsum.photos/id/32/50/50?grayscale",
+          title: "更多",
           url: "/booking/ticket",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
       ],
+
       salesBox: {
-        icon: "https://picsum.photos/seed/salesbox/200/300",
+        icon: "https://picsum.photos/id/63/20/20",
         moreUrl: "https://example.com/more",
         bigCard1: {
-          icon: "https://picsum.photos/seed/bigcard1/200/300",
-          title: "限时特惠",
+          icon: "https://picsum.photos/id/42/200/300?grayscale",
+          title: "携程超级会员",
           url: "/sale/limited",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
+
         bigCard2: {
-          icon: "https://picsum.photos/seed/bigcard2/200/300",
-          title: "会员专属",
+          icon: "https://picsum.photos/id/44/200/300?grayscale",
+          title: "爆款酒店",
           url: "/sale/vip",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
+
         smallCard1: {
-          icon: "https://picsum.photos/seed/smallcard1/200/300",
-          title: "机票折扣",
+          icon: "https://picsum.photos/id/57/200/100",
+          title: "球迷卡限时秒",
           url: "/sale/flight",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
+
         smallCard2: {
-          icon: "https://picsum.photos/seed/smallcard2/200/300",
-          title: "酒店优惠",
+          icon: "https://picsum.photos/id/58/200/100",
+          title: "领券中心",
           url: "/sale/hotel",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
+
         smallCard3: {
-          icon: "https://picsum.photos/seed/smallcard3/200/300",
-          title: "周边游",
+          icon: "https://picsum.photos/id/59/200/100",
+          title: "会员福利",
           url: "/sale/local",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,
         },
+
         smallCard4: {
-          icon: "https://picsum.photos/seed/smallcard4/200/300",
-          title: "自驾游",
+          icon: "https://picsum.photos/id/60/200/100",
+          title: "携程优品商场",
           url: "/sale/driving",
           statusBarColor: "#FFFFFF",
           hideAppBar: false,

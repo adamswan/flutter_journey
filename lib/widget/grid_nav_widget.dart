@@ -34,6 +34,7 @@ class GridNavWidget extends StatelessWidget {
   ///添加导航条，first 是否为第一个导航条
   Widget _gridNavItem(BuildContext context, Hotel gridNavItem, bool first) {
     List<Widget> items = [];
+
     items.add(_mainItem(context, gridNavItem.mainItem!));
     items.add(_doubleItem(context, gridNavItem.item1!, gridNavItem.item2!));
     items.add(_doubleItem(context, gridNavItem.item3!, gridNavItem.item4!));
@@ -73,7 +74,7 @@ class GridNavWidget extends StatelessWidget {
         children: [
           Image.network(
             model.icon!,
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
             height: 88,
             width: 121,
             alignment: AlignmentDirectional.bottomEnd,
@@ -124,6 +125,7 @@ class GridNavWidget extends StatelessWidget {
   ///上下item,first 是否为第一个item
   _item(BuildContext context, CommonModel item, bool first) {
     BorderSide borderSide = const BorderSide(width: 0.8, color: Colors.white);
+
     return Container(
       decoration: BoxDecoration(
         border: Border(

@@ -5,8 +5,11 @@ import 'package:journey/utils/navigator_util.dart';
 import 'package:journey/utils/screen_adapter_helper.dart';
 import 'package:journey/widget/banner_widget.dart';
 import 'package:journey/dao/home_dao.dart';
+import 'package:journey/widget/loading_container.dart';
 import 'package:journey/widget/local_nav_list_widget.dart';
 import 'package:journey/widget/grid_nav_widget.dart';
+import 'package:journey/widget/sub_nav_widget.dart';
+import 'package:journey/widget/sale_box_widget.dart';
 
 class HomePage extends StatefulWidget {
   static Config? configModel;
@@ -30,6 +33,7 @@ class _HomePageState extends State<HomePage>
   List<CommonModel> subNavList = [];
   GridNav? gridNavModel;
   SalesBox? salesBoxModel;
+  bool _loading = true;
 
   handlePressed() {
     // 退出登录
@@ -50,6 +54,24 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  _holdListView() {
+    return MediaQuery.removePadding(
+      removeTop: true,
+      context: context,
+      // 监听 ListView 的滚动事件
+      child: NotificationListener(
+        onNotification: (scrollNotification) {
+          if (scrollNotification is ScrollNotification &&
+              scrollNotification.depth == 0) {
+            _onScroll(scrollNotification.metrics.pixels);
+          }
+          return false;
+        },
+        child: _listView(),
+      ),
+    );
+  }
+
   _listView() {
     return ListView(
       children: [
@@ -60,15 +82,26 @@ class _HomePageState extends State<HomePage>
         LocalNavWidget(localNavList: localNavList),
 
         // 酒店 机票 旅游 的卡片导航
-        GridNavWidget(gridNavModel: gridNavModel!),
+        if (gridNavModel != null) ...[
+          GridNavWidget(gridNavModel: gridNavModel!),
+        ] else ...[
+          Container(), // 或其他占位组件
+        ],
+
+        // 活动的图标按钮入口
+        SubNavWidget(suNavList: subNavList),
 
         // 秒杀专区
-        // SalesBoxWidget(salesBoxModel: salesBoxModel),
+        if (salesBoxModel != null) ...[
+          SaleBoxWidget(salesBox: salesBoxModel!),
+        ] else ...[
+          Container(), // 或其他占位组件
+        ],
 
         // 底部导航栏
         _logout,
 
-        SizedBox(height: 800, child: ListTile(title: Text('123'))),
+        SizedBox(height: 800),
       ],
     );
   }
@@ -103,9 +136,14 @@ class _HomePageState extends State<HomePage>
         gridNavModel = model.gridNav;
         salesBoxModel = model.salesBox;
         bannerList = model.bannerList ?? [];
+        _loading = false;
       });
     } catch (e) {
       debugPrint(e.toString());
+    } finally {
+      setState(() {
+        _loading = false;
+      });
     }
   }
 
@@ -123,36 +161,12 @@ class _HomePageState extends State<HomePage>
     // 更新导航器的上下文context， 用于退出登录
     NavigatorUtil.updateContext(context);
 
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     backgroundColor: Colors.blue,
-    //     title: Text('首页'),
-    //     actions: [_logout],
-    //   ),
-    //   body: Column(children: [BannerWidget(bannerList: bannerList)]),
-    // );
-
     // 使用背景色能变透明的顶部导航栏
+    //
     return Scaffold(
-      body: Stack(
-        children: [
-          MediaQuery.removePadding(
-            removeTop: true,
-            context: context,
-            // 监听 ListView 的滚动事件
-            child: NotificationListener(
-              onNotification: (scrollNotification) {
-                if (scrollNotification is ScrollNotification &&
-                    scrollNotification.depth == 0) {
-                  _onScroll(scrollNotification.metrics.pixels);
-                }
-                return false;
-              },
-              child: _listView(),
-            ),
-          ),
-          _genTopBar(),
-        ],
+      body: LoadingContainer(
+        isLoading: _loading,
+        child: Stack(children: [_holdListView(), _genTopBar()]),
       ),
     );
   }
