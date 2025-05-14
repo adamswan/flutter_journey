@@ -32,7 +32,7 @@ class _TabNavigatorState extends State<TabNavigator> {
         children: [
           HomePage(),
           SearchPage(hideLeft: true),
-          TravelPage(),
+          TravelPge(),
           MyPage(),
         ],
       ),

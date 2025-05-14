@@ -419,6 +419,280 @@ const searchResults = {
   ],
 };
 
+// 类别
+const category = {
+  code: 0,
+  data: {
+    tabs: [
+      {
+        labelName: "发现",
+        groupChannelCode: "tourphoto_global1",
+      },
+      {
+        labelName: "玩乐",
+        groupChannelCode: "xinqitiyan",
+      },
+      {
+        labelName: "酒店",
+        groupChannelCode: "hotel",
+      },
+      {
+        labelName: "美食",
+        groupChannelCode: "msxwzl",
+      },
+      {
+        labelName: "亲子",
+        groupChannelCode: "children",
+      },
+      {
+        labelName: "网红",
+        groupChannelCode: "wanghongdakadi",
+      },
+      {
+        labelName: "拍照技巧",
+        groupChannelCode: "tab-photo",
+      },
+    ],
+  },
+  msg: "SUCCESS.",
+};
+
+// 旅拍列表
+const travels = {
+  code: 0,
+  data: {
+    total: 50,
+    list: [
+      {
+        type: 1,
+        article: {
+          articleId: 1001,
+          productType: 1,
+          sourceType: 2,
+          articleTitle: "广州塔夜景",
+          content:
+            "美丽的珠江边，广州塔在夜晚的灯光下显得格外迷人。",
+          author: {
+            authorId: 101,
+            nickName: "旅行达人小李",
+            coverImage: {
+              dynamicUrl:
+                "https://picsum.photos/id/100/200",
+              originalUrl:
+                "https://picsum.photos/id/55/100/200",
+            },
+          },
+          images: [
+            {
+              imageId: 1,
+              dynamicUrl:
+                "https://picsum.photos/id/56/100/200",
+              originalUrl:
+                "https://picsum.photos/id/56/100/200",
+              width: 800,
+              height: 600,
+            },
+            {
+              imageId: 2,
+              dynamicUrl:
+                "https://picsum.photos/id/57/100/200",
+              originalUrl:
+                "https://picsum.photos/id/57/100/200",
+              width: 800,
+              height: 600,
+            },
+          ],
+          readCount: 1234,
+          likeCount: 98,
+          commentCount: 25,
+          poiName: "广州塔",
+        },
+      },
+      {
+        type: 2,
+        article: {
+          articleId: 1002,
+          productType: 2,
+          sourceType: 1,
+          articleTitle: "深圳湾的日出",
+          content:
+            "清晨在深圳湾看日出，是都市中难得的宁静时刻。",
+          author: {
+            authorId: 102,
+            nickName: "摄影师老张",
+            coverImage: {
+              dynamicUrl:
+                "https://picsum.photos/id/58/100/200",
+              originalUrl:
+                "https://picsum.photos/id/58/100/200",
+            },
+          },
+          images: [
+            {
+              imageId: 3,
+              dynamicUrl:
+                "https://picsum.photos/id/59/100/200",
+              originalUrl:
+                "https://picsum.photos/id/59/100/200",
+              width: 800,
+              height: 600,
+            },
+          ],
+          readCount: 987,
+          likeCount: 67,
+          commentCount: 12,
+          poiName: "深圳湾公园",
+        },
+      },
+      {
+        type: 1,
+        article: {
+          articleId: 1003,
+          productType: 1,
+          sourceType: 2,
+          articleTitle: "厦门鼓浪屿",
+          content:
+            "鼓浪屿是一个充满文艺气息的小岛，适合慢节奏的旅行。",
+          author: {
+            authorId: 103,
+            nickName: "爱拍照的阿花",
+            coverImage: {
+              dynamicUrl:
+                "https://picsum.photos/id/60/100/200",
+              originalUrl:
+                "https://picsum.photos/id/60/100/200",
+            },
+          },
+          images: [
+            {
+              imageId: 4,
+              dynamicUrl:
+                "https://picsum.photos/id/61/100/200",
+              originalUrl:
+                "https://picsum.photos/id/61/100/200",
+              width: 800,
+              height: 600,
+            },
+          ],
+          readCount: 2000,
+          likeCount: 120,
+          commentCount: 30,
+          poiName: "鼓浪屿",
+        },
+      },
+      {
+        type: 2,
+        article: {
+          articleId: 1004,
+          productType: 2,
+          sourceType: 1,
+          articleTitle: "成都美食之旅",
+          content:
+            "成都不仅有火锅，还有各种小吃和茶馆文化。",
+          author: {
+            authorId: 104,
+            nickName: "吃货小王",
+            coverImage: {
+              dynamicUrl:
+                "https://picsum.photos/id/62/100/200",
+              originalUrl:
+                "https://picsum.photos/id/62/100/200",
+            },
+          },
+          images: [
+            {
+              imageId: 5,
+              dynamicUrl:
+                "https://picsum.photos/id/63/100/200",
+              originalUrl:
+                "https://picsum.photos/id/63/100/200",
+              width: 800,
+              height: 600,
+            },
+          ],
+          readCount: 1800,
+          likeCount: 110,
+          commentCount: 28,
+          poiName: "成都宽窄巷子",
+        },
+      },
+      {
+        type: 1,
+        article: {
+          articleId: 1005,
+          productType: 1,
+          sourceType: 2,
+          articleTitle: "杭州西湖游记",
+          content:
+            "三潭印月、雷峰塔、断桥残雪，西湖四季皆美。",
+          author: {
+            authorId: 105,
+            nickName: "江南小居",
+            coverImage: {
+              dynamicUrl:
+                "https://picsum.photos/id/64/100/200",
+              originalUrl:
+                "https://picsum.photos/id/64/100/200",
+            },
+          },
+          images: [
+            {
+              imageId: 6,
+              dynamicUrl:
+                "https://picsum.photos/id/65/100/200",
+              originalUrl:
+                "https://picsum.photos/id/65/100/200",
+              width: 800,
+              height: 600,
+            },
+          ],
+          readCount: 1500,
+          likeCount: 100,
+          commentCount: 20,
+          poiName: "西湖",
+        },
+      },
+      {
+        type: 2,
+        article: {
+          articleId: 1006,
+          productType: 2,
+          sourceType: 1,
+          articleTitle: "北京胡同生活",
+          content: "走进胡同深处，感受老北京的生活气息。",
+          author: {
+            authorId: 106,
+            nickName: "胡同大爷",
+            coverImage: {
+              dynamicUrl:
+                "https://picsum.photos/id/66/100/200",
+              originalUrl:
+                "https://picsum.photos/id/66/100/200",
+            },
+          },
+          images: [
+            {
+              imageId: 7,
+              dynamicUrl:
+                "https://picsum.photos/id/67/100/200",
+              originalUrl:
+                "https://picsum.photos/id/67/100/200",
+              width: 800,
+              height: 600,
+            },
+          ],
+          readCount: 1300,
+          likeCount: 80,
+          commentCount: 18,
+          poiName: "南锣鼓巷",
+        },
+      },
+    ],
+  },
+  extra: {},
+  msg: "string",
+};
+
 // ----------模拟数据库
 
 // 密钥
@@ -614,6 +888,30 @@ app.get("/api/home", verifyToken, (req, res) => {
 app.get("/api/search", verifyToken, (req, res) => {
   try {
     res.send(searchResults);
+  } catch (error) {
+    res.status(500).send({
+      message: "Error fetching trips",
+      error: error.message,
+    });
+  }
+});
+
+// 旅拍频道分类
+app.get("/api/category", verifyToken, (req, res) => {
+  try {
+    res.send(category);
+  } catch (error) {
+    res.status(500).send({
+      message: "Error fetching trips",
+      error: error.message,
+    });
+  }
+});
+
+// 旅拍列表
+app.get("/api/travels", verifyToken, (req, res) => {
+  try {
+    res.send(travels);
   } catch (error) {
     res.status(500).send({
       message: "Error fetching trips",

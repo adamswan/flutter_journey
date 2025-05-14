@@ -42,7 +42,7 @@ class _BannerWidgetState extends State<BannerWidget> {
           carouselController: _controller,
           options: CarouselOptions(
             height: 160.0.toFitSize, // 设置高度
-            autoPlay: true, // 自动播放
+            // autoPlay: true, // 自动播放
             enlargeCenterPage: false, // 关闭中间放大效果
             viewportFraction: 1.0, // 每屏只显示一张
             onPageChanged: (index, reason) {
