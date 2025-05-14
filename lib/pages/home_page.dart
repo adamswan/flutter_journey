@@ -10,6 +10,11 @@ import 'package:journey/widget/local_nav_list_widget.dart';
 import 'package:journey/widget/grid_nav_widget.dart';
 import 'package:journey/widget/sub_nav_widget.dart';
 import 'package:journey/widget/sale_box_widget.dart';
+import 'package:journey/utils/view_util.dart';
+import 'package:journey/widget/search_bar_widget.dart';
+import 'package:journey/pages/search_page.dart';
+
+const searchBarDefaultText = '网红打卡地 景点 酒店';
 
 class HomePage extends StatefulWidget {
   static Config? configModel;
@@ -40,17 +45,56 @@ class _HomePageState extends State<HomePage>
     return LoginDao.logout();
   }
 
+  _jumpToSearch() {
+    // 跳转到搜索页面
+    NavigatorUtil.push(context, const SearchPage());
+  }
+
   // 生成透明度能变化的顶部导航栏
   _genTopBar() {
-    return Opacity(
-      opacity: topBarAlpha,
-      child: Container(
-        height: 80.toFitSize,
-        decoration: const BoxDecoration(color: Colors.white),
-        child: const Center(
-          child: Padding(padding: EdgeInsets.only(top: 20), child: Text('首页')),
+    // return Opacity(
+    //   opacity: topBarAlpha,
+    //   child: Container(
+    //     height: 80.toFitSize,
+    //     decoration: const BoxDecoration(color: Colors.white),
+    //     child: const Center(
+    //       child: Padding(padding: EdgeInsets.only(top: 20), child: Text('首页')),
+    //     ),
+    //   ),
+    // );
+
+    //获取刘海屏实际的Top 安全边距
+    double top = MediaQuery.of(context).padding.top;
+    return Column(
+      children: [
+        shadowWarp(
+          child: Container(
+            padding: EdgeInsets.only(top: top),
+            height: 60 + top,
+            decoration: BoxDecoration(
+              color: Color.fromARGB((topBarAlpha * 255).toInt(), 255, 255, 255),
+            ),
+            child: SearchBarWidget(
+              searchBarType:
+                  topBarAlpha > 0.2
+                      ? SearchBarType.homeLight
+                      : SearchBarType.home,
+              inputBoxClick: _jumpToSearch,
+              defaultText: searchBarDefaultText,
+              rightButtonClick: () {
+                LoginDao.logout();
+              },
+            ),
+          ),
         ),
-      ),
+        // bottom line
+        Container(
+          height: topBarAlpha > 0.2 ? 0.5 : 0,
+          decoration: const BoxDecoration(
+            boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 0.5)],
+          ),
+        ),
+      ],
     );
   }
 

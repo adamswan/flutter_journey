@@ -32,4 +32,10 @@ class NavigatorUtil {
       MaterialPageRoute(builder: (context) => const LoginPage()),
     );
   }
+
+  static pop(BuildContext context) {
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    }
+  }
 }

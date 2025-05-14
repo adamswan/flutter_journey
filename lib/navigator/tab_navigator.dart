@@ -29,7 +29,12 @@ class _TabNavigatorState extends State<TabNavigator> {
 
         physics: NeverScrollableScrollPhysics(), // 禁止横向滑动
         // 底部导航栏对应的页面
-        children: [HomePage(), SearchPage(), TravelPage(), MyPage()],
+        children: [
+          HomePage(),
+          SearchPage(hideLeft: true),
+          TravelPage(),
+          MyPage(),
+        ],
       ),
       // 底部导航栏的按钮
       bottomNavigationBar: BottomNavigationBar(

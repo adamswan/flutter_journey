@@ -65,7 +65,57 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // 根据传入的  widget.searchBarType 来决定显示样式
+    if (widget.searchBarType == SearchBarType.normal) {
+      return _normalSearchBar();
+    }
+
+    if (widget.searchBarType == SearchBarType.home) {
+      return _homeSearchBar();
+    }
+
     return _normalSearchBar();
+  }
+
+  // 在首页的搜索框(透明的)
+  _homeSearchBar() {
+    return Row(
+      children: [
+        // 左侧显示的当前城市
+        _wrapTap(
+          Container(
+            padding: EdgeInsets.fromLTRB(6, 5, 5, 5),
+            child: Row(
+              children: [
+                Text('北京', style: TextStyle(color: _homeFontColor())),
+                Icon(Icons.expand_more, color: _homeFontColor(), size: 22),
+              ],
+            ),
+          ),
+          widget.leftButtonClick,
+        ),
+        // 中间搜索框
+        Expanded(child: _inputBox()),
+        // 登出按钮
+        _wrapTap(
+          Container(
+            padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+            child: Text(
+              '登出',
+              style: TextStyle(color: _homeFontColor(), fontSize: 12),
+            ),
+          ),
+          widget.rightButtonClick,
+        ),
+      ],
+    );
+  }
+
+  _homeFontColor() {
+    if (widget.searchBarType == SearchBarType.homeLight) {
+      return Colors.black54;
+    }
+    return Colors.white;
   }
 
   // 在搜索页面的搜索框
@@ -110,6 +160,52 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return null;
   }
 
+  _onChanged(String value) {
+    if (value.isNotEmpty) {
+      setState(() {
+        showClear = true;
+      });
+    } else {
+      setState(() {
+        showClear = false;
+      });
+    }
+
+    if (widget.onChange != null) {
+      widget.onChange!(value);
+    }
+  }
+
+  _textField() {
+    if (widget.searchBarType == SearchBarType.normal) {
+      return TextField(
+        controller: _controller,
+        onChanged: _onChanged,
+        autofocus: true,
+        cursorColor: Colors.blue,
+        style: TextStyle(
+          fontSize: 18,
+          color: Colors.black,
+          fontWeight: FontWeight.w300,
+        ),
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.only(left: 5, bottom: 20, right: 5),
+          border: InputBorder.none,
+          hintText: widget.hint,
+          hintStyle: TextStyle(fontSize: 15),
+        ),
+      );
+    } else {
+      return _wrapTap(
+        Text(
+          widget.defaultText ?? '',
+          style: TextStyle(fontSize: 13, color: Colors.grey),
+        ),
+        widget.inputBoxClick,
+      );
+    }
+  }
+
   _inputBox() {
     Color inputBoxColor;
 
@@ -138,8 +234,15 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                     ? Color(0xffa9a9a9)
                     : Colors.blue,
           ),
-          Expanded(child: Container()),
-          // todo 清除按钮
+          Expanded(child: _textField()),
+
+          if (showClear)
+            _wrapTap(Icon(Icons.clear, size: 22, color: Colors.grey), () {
+              setState(() {
+                _controller.clear();
+              });
+              _onChanged('');
+            }),
         ],
       ),
     );

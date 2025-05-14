@@ -342,6 +342,83 @@ const homeData = [
   },
 ];
 
+// 搜索页的搜索结果
+const searchResults = {
+  code: 0,
+  extra: {},
+  msg: "string",
+  data: [
+    {
+      code: "district_152",
+      word: "广州",
+      type: "district",
+      districtname: "广东",
+      url: "http://m.ctrip.com/webapp/you/place/152.html",
+      isBigIcon: false,
+    },
+    {
+      code: "districtsight_152",
+      word: "广州·热门景点",
+      type: "sight",
+      districtname: "",
+      url: "https://m.ctrip.com/webapp/you/sight/152.html",
+      isBigIcon: false,
+    },
+    {
+      code: "traveler_317857830",
+      word: "广州热雪奇迹",
+      type: "plantshipflag",
+      districtname: "官方旗舰店",
+      url: "https://m.ctrip.com/webapp/you/travelshoot/starBall/indexPage?isHideNavBar=yes&pop=close&autoawaken=close&ct=card&clientAuth=4714D553914CBD9488DE9FD0C288CFB4&sourceFrom=homesearch",
+      imageUrl:
+        "https://dimg04.c-ctrip.com/images/1n70t12000b0m5afrC8FE_C_180_180.jpg",
+      subImageUrl:
+        "https://pages.c-ctrip.com/travesnap-j/starBall/blue.png",
+      isBigIcon: false,
+      sourceType: "starContract",
+    },
+    {
+      code: "sight_6802",
+      word: "长隆野生动物世界",
+      type: "sight",
+      districtname: "广州",
+      url: "http://m.ctrip.com/webapp/you/sight/152/6802.html",
+      isBigIcon: false,
+    },
+    {
+      code: "sight_107540",
+      word: "广州塔",
+      type: "sight",
+      districtname: "广州",
+      url: "http://m.ctrip.com/webapp/you/sight/152/107540.html",
+      isBigIcon: false,
+    },
+    {
+      code: "sight_48593",
+      word: "长隆欢乐世界",
+      type: "sight",
+      districtname: "广州",
+      url: "http://m.ctrip.com/webapp/you/sight/152/48593.html",
+      isBigIcon: false,
+    },
+    {
+      code: "channeltravelsearch_0",
+      word: "广州的全部旅游产品",
+      type: "channeltravelsearch",
+      url: "http://m.ctrip.com/webapp/tour/tours?saleCityId=1&kwd=广州",
+      isBigIcon: false,
+    },
+    {
+      code: "hotellist_152",
+      word: "广州的酒店",
+      type: "hotellist",
+      districtname: "广东",
+      url: "https://m.ctrip.com/webapp/hotels/list?city=32",
+      isBigIcon: false,
+    },
+  ],
+};
+
 // ----------模拟数据库
 
 // 密钥
@@ -525,6 +602,18 @@ app.put(
 app.get("/api/home", verifyToken, (req, res) => {
   try {
     res.send(homeData);
+  } catch (error) {
+    res.status(500).send({
+      message: "Error fetching trips",
+      error: error.message,
+    });
+  }
+});
+
+// 搜索
+app.get("/api/search", verifyToken, (req, res) => {
+  try {
+    res.send(searchResults);
   } catch (error) {
     res.status(500).send({
       message: "Error fetching trips",
