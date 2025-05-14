@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:journey/widget/search_bar_widget.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -11,8 +12,8 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('搜索'), backgroundColor: Colors.blue),
-      body: Column(children: [Text('搜索')]),
+      appBar: AppBar(title: const Text('搜索'), backgroundColor: Colors.white),
+      body: Column(children: [SearchBarWidget()]),
     );
   }
 }
